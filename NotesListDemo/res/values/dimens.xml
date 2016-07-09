@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <dimen name="common_container_margin">10dp</dimen>
+    <dimen name="common_layout_margin">5dp</dimen>
+    <dimen name="common_view_margin">5dp</dimen>
+    
+    <dimen name="common_container_padding">10dp</dimen>
+    <dimen name="common_layout_padding">5dp</dimen>
+    <dimen name="common_view_padding">5dp</dimen>
+    
+    <dimen name="common_line_height">1dp</dimen>
+    
+    <dimen name="common_item_height">20dp</dimen>
+    <dimen name="common_text_size">16dp</dimen>
+    
+    <dimen name="drawable_layout_width">200dp</dimen>
+    <dimen name="edittext_linespace_extra">2dp</dimen>
+
+</resources>

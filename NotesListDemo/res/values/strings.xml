@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">云便签</string>
+    <string name="empty_string">这里没有记事哦</string>
+    <string name="login_text">登录</string>
+    <string name="logout_text">登出</string>
+    <string name="drawable_note">记事</string>
+    <string name="drawable_important">星标记事</string>
+    <string name="drawable_discard">回收站</string>
+    
+    <string name="action_search">搜索</string>
+    <string name="action_new">新加</string>
+    
+    <string name="note_edit_title_hint">点击屏幕下方按钮添加正文</string>
+    <string name="action_save">保存</string>
+    <string name="action_text">编辑</string>
+    <string name="action_picture">图片</string>
+     <string name="action_record">录音</string>
+     <string name="action_video">视频</string>
+    <string name="action_todo">待办</string>
+     <string name="action_bill">账单</string>
+   
+
+    <string name="whether_delete">是否删除</string>
+    <string name="whether_save">是否保存</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
+    <string name="can_not_insert">当前编辑不支持插入附件</string>
+</resources>

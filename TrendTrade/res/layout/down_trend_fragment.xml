@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- ############################ 下降趋势  ###################################### -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2" >
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下降趋势顶1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下降趋势底1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="回调区间" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/down_trend_uppoint1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numeric="decimal" />
+
+            <EditText
+                android:id="@+id/down_trend_lowpoint1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numeric="decimal" />
+
+            <TextView
+                android:id="@+id/down_trend_correction_zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下降趋势顶2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="阻力区间" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="目标区间" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/down_trend_uppoint2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numeric="decimal" />
+
+            <TextView
+                android:id="@+id/down_trend_resistance_zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/down_trend_target_zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="建仓价"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="止损位" 
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="盈亏比"
+                android:visibility="gone"  />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/down_trend_takeprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numeric="decimal"
+                android:visibility="gone"  />
+
+            <TextView
+                android:id="@+id/down_trend_stoplose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/down_trend_profit_lose_ratio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"  />
+        </TableRow>
+        
+         <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="下降趋势底2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:text="支撑位"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回调区间" />
+            </TableRow>
+            
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/down_trend_lowpoint2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numeric="decimal"/>
+
+                <TextView
+                    android:id="@+id/down_trend_strutlpoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/down_trend_correction_zone2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="下降趋势顶3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:text="复杂浪"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="目标区间" />
+            </TableRow>
+            
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/down_trend_uppoint3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numeric="decimal"/>
+
+                <Spinner
+                    android:id="@+id/down_trend_complexwave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/down_trend_target_zone2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+    </TableLayout>
+
+</LinearLayout>

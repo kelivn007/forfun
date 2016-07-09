@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/note_title_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_container_margin" >
+
+        <ToggleButton
+            android:id="@+id/note_important_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/important_selector"
+            android:checked="false"
+            android:textOff=""
+            android:textOn="" />
+
+        <EditText
+            android:id="@+id/note_title_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/note_important_btn"
+            android:layout_toLeftOf="@id/note_important_btn"
+            android:hint="@string/note_edit_title_hint"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_line_height"
+        android:layout_gravity="center_horizontal"
+        android:background="?android:attr/listDivider" />
+
+    <hw.app.notelist.widget.RichEditor
+        android:id="@+id/note_body_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/common_container_margin"
+        android:orientation="vertical" />
+
+</LinearLayout>
