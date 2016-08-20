@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
  */
-package forfun.com.guesssong.ui.Activity;
+package forfun.com.guesssong.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;

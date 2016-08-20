@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
  */
-package forfun.com.guesssong.ui.View;
+package forfun.com.guesssong.ui.view;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import forfun.com.guesssong.R;
 import forfun.com.guesssong.model.ISelectWordListener;
-import forfun.com.guesssong.model.SelectWord;
+import forfun.com.guesssong.model.bean.SelectWord;
 
 /**
  * Created by huangwei05 on 16/7/21.

@@ -14,33 +14,38 @@ public class DataUtil {
 
     private static final String KEY_STAGE = "stage";
     private static final String KEY_COIN = "coin";
+    private static Context mContext;
 
-    public static int readStage(Context context) {
-        int stage = readInt(context, KEY_STAGE, 1);
+    public static void init(Context context) {
+        mContext = context;
+    }
+
+    public static int readStage() {
+        int stage = readInt(KEY_STAGE, 1);
 
         return stage > Constant.SONG_INFO.length ? 1 : stage;
     }
 
-    public static int readCoin(Context context) {
-        int coin = readInt(context, KEY_COIN, 300);
+    public static int readCoin() {
+        int coin = readInt(KEY_COIN, 300);
         return coin > 0 ? coin : 0;
     }
 
-    public static int readInt(Context context, String key, int defaulValue) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public static int readInt(String key, int defaulValue) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         return preferences.getInt(key, defaulValue);
     }
 
-    public static void writeStage(Context context, int stage) {
-        writeInt(context, KEY_STAGE, stage);
+    public static void writeStage(int stage) {
+        writeInt(KEY_STAGE, stage);
     }
 
-    public static void writeCoin(Context context, int coin) {
-        writeInt(context, KEY_COIN, coin);
+    public static void writeCoin(int coin) {
+        writeInt(KEY_COIN, coin);
     }
 
-    public static void writeInt(Context context, String key, int value) {
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+    public static void writeInt(String key, int value) {
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(mContext).edit();
         editor.putInt(key, value).commit();
     }
 }

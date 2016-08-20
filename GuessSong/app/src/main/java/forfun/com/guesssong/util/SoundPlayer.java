@@ -19,20 +19,25 @@ public class SoundPlayer {
     private static final String CANCEL_SOUND_PATH = "cancel.mp3";
     private static final String COIN_SOUND_PATH = "coin.mp3";
 
+    private static Context mContext;
 
-    public static void playEnter(Context context) {
-        playFile(context, ENTER_SOUND_PATH);
+    public static void init(Context context) {
+        mContext = context;
     }
 
-    public static void playCancel(Context context) {
-        playFile(context, CANCEL_SOUND_PATH);
+    public static void playEnter() {
+        playFile(ENTER_SOUND_PATH);
     }
 
-    public static void playCoin(Context context) {
-        playFile(context, COIN_SOUND_PATH);
+    public static void playCancel() {
+        playFile(CANCEL_SOUND_PATH);
     }
 
-    public static void playFile(Context context, String filePath) {
+    public static void playCoin() {
+        playFile(COIN_SOUND_PATH);
+    }
+
+    public static void playFile(String filePath) {
         if (null == mMdeiaPlayer) {
             mMdeiaPlayer = new MediaPlayer();
         }
@@ -40,7 +45,7 @@ public class SoundPlayer {
         mMdeiaPlayer.reset();
 
         try {
-            AssetFileDescriptor fd = context.getAssets().openFd(filePath);
+            AssetFileDescriptor fd = mContext.getAssets().openFd(filePath);
             mMdeiaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
             mMdeiaPlayer.prepare();
             mMdeiaPlayer.start();

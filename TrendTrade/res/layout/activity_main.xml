@@ -107,6 +107,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/zhenglixingtai" />
+        
+         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="量价关系"
+            android:textColor="#ffff0000"
+            android:textSize="26sp" />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/liangjiaguanxi" />
     </LinearLayout>
 
 </ScrollView>

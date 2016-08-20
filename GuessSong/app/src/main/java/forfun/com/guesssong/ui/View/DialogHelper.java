@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
  */
-package forfun.com.guesssong.ui.View;
+package forfun.com.guesssong.ui.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import forfun.com.guesssong.R;
-
 
 /**
  * Created by huangwei05 on 16/7/25.
