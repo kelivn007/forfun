@@ -3,6 +3,9 @@
  */
 package forfun.com.guesssong.presenter.impl;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import forfun.com.guesssong.model.SongModel;
 import forfun.com.guesssong.model.bean.Song;
 import forfun.com.guesssong.presenter.BasePresenter;
@@ -34,12 +37,14 @@ public class MainPresenter extends BasePresenter {
     private IMainPresenter mListener;
     private SongModel mSongModel;
     private int mCurrentCoins = 300;
+    private ExecutorService mExecutorSevice;
 
     public MainPresenter() {
         mSongModel = new SongModel();
         mSongModel.init();
 
         mCurrentCoins = DataUtil.readCoin();
+        mExecutorSevice = Executors.newCachedThreadPool();
     }
 
     public void regist(IMainPresenter listener) {
@@ -54,20 +59,25 @@ public class MainPresenter extends BasePresenter {
         mListener.showPlaySong();
     }
 
-    public void checkAnswerWord(String answer) {
-        FLog.d("answerstr = " + answer);
+    public void checkAnswerWord(final String answer) {
+        mExecutorSevice.submit(new Runnable() {
+            @Override
+            public void run() {
+                FLog.d("answerstr = " + answer);
 
-        switch (mSongModel.checkAnswer(answer)) {
-            case UNCOMPLETE :
-                break;
-            case WRONG:
-                mListener.sparkAnswer();
-                break;
-            case RIGTH:
-                SoundPlayer.playCoin();
-                mListener.showPassView(mSongModel.getCurrentStage(), mSongModel.getCurrentSong());
-                break;
-        }
+                switch (mSongModel.checkAnswer(answer)) {
+                    case UNCOMPLETE :
+                        break;
+                    case WRONG:
+                        mListener.sparkAnswer();
+                        break;
+                    case RIGTH:
+                        SoundPlayer.playCoin();
+                        mListener.showPassView(mSongModel.getCurrentStage(), mSongModel.getCurrentSong());
+                        break;
+                }
+            }
+        });
     }
 
     public void clickNextLevel() {

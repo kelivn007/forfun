@@ -155,24 +155,23 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
 
     @Override
     public void onWordSelect(SelectWord word) {
+        String answerstr = "";
         for (int i = 0; i < mAnswerWordView.getChildCount(); i++) {
             TextView answerTxt = (TextView) mAnswerWordView.getChildAt(i);
+
             if (TextUtils.isEmpty(answerTxt.getText())) {
                 answerTxt.setText(word.mWord);
                 answerTxt.setTag(word);
+                FLog.i(word.mSelectWordBtn + "");
                 word.mSelectWordBtn.setVisibility(View.INVISIBLE);
+                answerstr = answerstr + answerTxt.getText();
                 break;
+            } else {
+                answerstr = answerstr + answerTxt.getText();
             }
         }
 
-        String answerstr = "";
-        for (int i = 0; i < mAnswerWordView.getChildCount(); i++) {
-            SelectWord answerword = (SelectWord) mAnswerWordView.getChildAt(i).getTag();
-            if (null != answerword) {
-                answerstr = answerstr + answerword.mWord;
-            }
-        }
-
+        FLog.i("onWordSelect : " + answerstr);
         mMainPresenter.checkAnswerWord(answerstr);
     }
 
@@ -199,9 +198,10 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
                     public void onClick(View v) {
                         SelectWord word = (SelectWord) v.getTag();
                         if (null != word) {
+                            FLog.i(word.mSelectWordBtn + "");
                             word.mSelectWordBtn.setVisibility(View.VISIBLE);
-                            ((TextView) v).setText("");
                             v.setTag(null);
+                            ((TextView) v).setText("");
                         }
                     }
                 });

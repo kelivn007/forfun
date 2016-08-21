@@ -72,15 +72,18 @@ public class SelectWordView extends GridView {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
             SelectWord selectWord = mSelectWordArr.get(position);
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.input_item, null);
-            Button btnWord = (Button) convertView.findViewById(R.id.btn_word);
-            selectWord.mSelectWordBtn = btnWord;
-            selectWord.mSelectWordBtn.setOnClickListener(this);
 
-            selectWord.mSelectWordBtn.setText(selectWord.mWord);
-            selectWord.mSelectWordBtn.setVisibility(View.VISIBLE);
+            if (null == convertView) {
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.input_item, null);
+                Button btnWord = (Button) convertView.findViewById(R.id.btn_word);
+                btnWord.setOnClickListener(this);
+            }
+
+            Button btnWord = (Button) convertView.findViewById(R.id.btn_word);
+            btnWord.setText(selectWord.mWord);
+
+            btnWord.setVisibility(View.VISIBLE);
 
             Animation scaleAnim = AnimationUtils.loadAnimation(mContext, R.anim.common_scale);
             scaleAnim.setStartOffset(position * 50);
@@ -93,7 +96,9 @@ public class SelectWordView extends GridView {
         @Override
         public void onClick(View v) {
             if (null != mSelectWordLinstener) {
-                mSelectWordLinstener.onWordSelect((SelectWord) ((ViewGroup) v.getParent()).getTag());
+                SelectWord selectWord = (SelectWord) ((ViewGroup) v.getParent()).getTag();
+                selectWord.mSelectWordBtn = (Button) v;
+                mSelectWordLinstener.onWordSelect(selectWord);
             }
         }
     }
