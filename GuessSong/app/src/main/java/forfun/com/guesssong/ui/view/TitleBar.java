@@ -49,6 +49,8 @@ public class TitleBar extends FrameLayout {
         mShowStage = a.getBoolean(R.styleable.TitleBar_show_stage, false);
         mShowCoin = a.getBoolean(R.styleable.TitleBar_show_coin, false);
 
+        a.recycle();
+
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.top_bar, this);
 

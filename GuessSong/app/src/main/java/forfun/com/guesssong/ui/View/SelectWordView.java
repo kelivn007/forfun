@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -28,6 +29,7 @@ public class SelectWordView extends GridView {
     private Context mContext;
     private WordAdapter mAdapter;
     private ISelectWordListener mSelectWordLinstener;
+    private GridLayoutAnimationController mGridLayoutAnimationController;
 
     public SelectWordView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,6 +40,13 @@ public class SelectWordView extends GridView {
     private void init() {
         mAdapter = new WordAdapter();
         setAdapter(mAdapter);
+        Animation scaleAnim = AnimationUtils.loadAnimation(mContext, R.anim.common_scale);
+        mGridLayoutAnimationController = new GridLayoutAnimationController(scaleAnim);
+        mGridLayoutAnimationController.setColumnDelay(0.5f);
+        mGridLayoutAnimationController.setRowDelay(0.3f);
+        mGridLayoutAnimationController.setDirection(GridLayoutAnimationController.DIRECTION_TOP_TO_BOTTOM);
+        setLayoutAnimation(mGridLayoutAnimationController);
+        startLayoutAnimation();
     }
 
     public void setSelectListener(ISelectWordListener listener) {
@@ -85,10 +94,6 @@ public class SelectWordView extends GridView {
             selectWord.mSelectWordBtn = btnWord;
 
             btnWord.setVisibility(View.VISIBLE);
-
-            Animation scaleAnim = AnimationUtils.loadAnimation(mContext, R.anim.common_scale);
-            scaleAnim.setStartOffset(position * 50);
-            convertView.startAnimation(scaleAnim);
 
             convertView.setTag(selectWord);
             return convertView;
