@@ -5,8 +5,8 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <rotate
         android:duration="600"
-        android:fromDegrees="40"
+        android:fromDegrees="35"
         android:toDegrees="0"
-        android:pivotX="73%"
+        android:pivotX="40%"
         android:pivotY="8%"/>
 </set>

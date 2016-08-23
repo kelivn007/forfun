@@ -22,7 +22,7 @@
     <RelativeLayout
             android:id="@+id/game_center_panel"
             android:layout_below="@id/top_bar_panel"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp">
@@ -50,15 +50,10 @@
         <FrameLayout
                 android:id="@+id/record_disc_panel"
                 android:layout_below="@id/guess_type_panel"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp">
-
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/record_outline"/>
 
             <ImageView
                     android:id="@+id/img_record_disc"
@@ -81,13 +76,15 @@
                     android:clickable="true"
                     android:src="@drawable/record_play"/>
 
-            <ImageView
-                    android:id="@+id/img_record_pin"
-                    android:layout_gravity="right|center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/record_pin"/>
         </FrameLayout>
+
+        <ImageView
+                android:id="@+id/img_record_pin"
+                android:layout_toRightOf="@id/record_disc_panel"
+                android:layout_alignTop="@+id/record_disc_panel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/index_pin"/>
     </RelativeLayout>
 
 
@@ -95,6 +92,7 @@
             android:id="@+id/delete_answer_panel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:layout_alignTop="@id/game_center_panel">
 
         <ImageButton
@@ -121,15 +119,10 @@
                 android:text="@integer/pay_delete_answer"/>
     </FrameLayout>
 
-    <include
-            android:id="@+id/input_panel"
-            layout="@layout/input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"/>
-
     <FrameLayout
-            android:layout_above="@id/input_panel"
+            android:id="@+id/tip_answer_panel"
+            android:layout_below="@id/delete_answer_panel"
+            android:layout_margin="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -158,10 +151,19 @@
     </FrameLayout>
 
 
+    <include
+            android:id="@+id/input_panel"
+            layout="@layout/input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+
     <ImageButton
-            android:layout_alignTop="@id/game_center_panel"
-            android:layout_alignParentRight="true"
+            android:layout_above="@id/input_panel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:background="@drawable/game_share"/>
+
+
 </RelativeLayout>
