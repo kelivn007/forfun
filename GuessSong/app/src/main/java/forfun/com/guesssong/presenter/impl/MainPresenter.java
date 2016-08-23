@@ -84,6 +84,8 @@ public class MainPresenter extends BasePresenter {
         SoundPlayer.pause();
         if (mSongModel.nextSong()) {
             SoundPlayer.playEnter();
+            mCurrentCoins += 30;
+            mListener.updateCoins(mCurrentCoins);
             mListener.showAnswerView(mSongModel.getCurrentStage(), mSongModel.getCurrentSong());
         } else {
             mListener.showAllPassView();

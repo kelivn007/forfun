@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
@@ -32,12 +33,15 @@ import forfun.com.guesssong.presenter.impl.MainPresenter;
 import forfun.com.guesssong.ui.view.DialogHelper;
 import forfun.com.guesssong.ui.view.MyAnimationListener;
 import forfun.com.guesssong.ui.view.SelectWordView;
+import forfun.com.guesssong.ui.view.TitleBar;
 import forfun.com.guesssong.util.FLog;
 import forfun.com.guesssong.util.SoundPlayer;
 import forfun.com.guesssong.util.WordUtil;
 
 public class MainActivity extends Activity implements View.OnClickListener, ISelectWordListener, MainPresenter
         .IMainPresenter, LoaderManager.LoaderCallbacks<MainPresenter> {
+
+    private TitleBar mTitleBar;
 
     private ImageView mBtnRecordPlay;
     private ImageView mImgRecordDisc;
@@ -53,13 +57,11 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
     private ImageButton mDeleteAnswerBtn;
     private ImageButton mTipAnswerBtn;
 
+    private AlertDialog mNextLevelDialog;
     private ViewGroup mNextLevelPannel;
     private TextView mNextLevelStageTxt;
     private TextView mNextLevelSongNameTxt;
     private ImageButton mNextLevelBtn;
-    private TextView mCurrentStageTxt;
-
-    private TextView mCurrentCoinTxt;
 
     private MainPresenter mMainPresenter;
 
@@ -67,6 +69,8 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTitleBar = (TitleBar) findViewById(R.id.top_bar_panel);
 
         mBtnRecordPlay = (ImageView) findViewById(R.id.btn_record_play);
         mBtnRecordPlay.setOnClickListener(this);
@@ -102,20 +106,18 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
         mSelectWordView = (SelectWordView) findViewById(R.id.select_word_view);
         mSelectWordView.setSelectListener(this);
 
-        mCurrentCoinTxt = (TextView) findViewById(R.id.current_coin_txt);
-
         mDeleteAnswerBtn = (ImageButton) findViewById(R.id.delete_answer_btn);
         mDeleteAnswerBtn.setOnClickListener(this);
         mTipAnswerBtn = (ImageButton) findViewById(R.id.tip_answer_btn);
         mTipAnswerBtn.setOnClickListener(this);
 
-        mNextLevelPannel = (ViewGroup) findViewById(R.id.next_level_pannel);
-        mNextLevelStageTxt = (TextView) findViewById(R.id.stage_txt);
-        mNextLevelSongNameTxt = (TextView) findViewById(R.id.song_name);
-        mNextLevelBtn = (ImageButton) findViewById(R.id.next_level_btn);
+        mNextLevelPannel = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.next_level_layout, null);
+        mNextLevelStageTxt = (TextView) mNextLevelPannel.findViewById(R.id.stage_txt);
+        mNextLevelSongNameTxt = (TextView) mNextLevelPannel.findViewById(R.id.song_name);
+        mNextLevelBtn = (ImageButton) mNextLevelPannel.findViewById(R.id.next_level_btn);
         mNextLevelBtn.setOnClickListener(this);
-
-        mCurrentStageTxt = (TextView) findViewById(R.id.current_stage_txt);
+        mNextLevelDialog = new AlertDialog.Builder(this).setView(mNextLevelPannel).create();
+        mNextLevelDialog.setCancelable(false);
 
         getLoaderManager().initLoader(1, null, this);
     }
@@ -184,11 +186,13 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
     public void showAnswerView(int stage, Song song) {
         mImgRecordDisc.clearAnimation();
         mImgRecordPin.clearAnimation();
-        mNextLevelPannel.setVisibility(View.INVISIBLE);
+        if (mNextLevelDialog.isShowing()) {
+            mNextLevelDialog.dismiss();
+        }
 
         LayoutInflater inflater = LayoutInflater.from(this);
         if (null != song) {
-            mCurrentStageTxt.setText(stage + "");
+            mTitleBar.updateStage(stage + "");
             mAnswerWordView.removeAllViews();
             for (int i = 0; i < song.getName().length(); i++) {
                 TextView answerTxt = (TextView) inflater.inflate(R.layout.answer_word_item, null);
@@ -249,10 +253,18 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
     }
 
     @Override
-    public void showPassView(int stage, Song song) {
-        mNextLevelPannel.setVisibility(View.VISIBLE);
-        mNextLevelStageTxt.setText(stage + "");
-        mNextLevelSongNameTxt.setText(song.getName());
+    public void showPassView(final int stage, final Song song) {
+        FLog.d("showPassView stage=" + stage + " song=" + song);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (!mNextLevelDialog.isShowing()) {
+                    mNextLevelStageTxt.setText(stage + "");
+                    mNextLevelSongNameTxt.setText(song.getName());
+                    mNextLevelDialog.show();
+                }
+            }
+        });
     }
 
     @Override
@@ -267,7 +279,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
 
                     @Override
                     public void onClick(boolean confirm) {
-                       mMainPresenter.confirmDelete(confirm);
+                        mMainPresenter.confirmDelete(confirm);
                     }
                 }).show();
     }
@@ -324,7 +336,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
 
     @Override
     public void updateCoins(int num) {
-        mCurrentCoinTxt.setText(num + "");
+        mTitleBar.updateCoin(num + "");
     }
 
     private SelectWord findTipAnswer(Song song, int index) {

@@ -9,11 +9,17 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <include layout="@layout/top_bar"/>
+    <forfun.com.guesssong.ui.view.TitleBar xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:show_back="true"
+            app:show_coin="false"
+            app:show_stage="false"/>
 
     <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/allpass_back0">
         <ImageView
                 android:layout_gravity="center"
@@ -25,11 +31,13 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/game_wx_text"/>
 
     <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/allpass_back1">
         <ImageView
                 android:clickable="true"
@@ -42,11 +50,13 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/about_rank_text"/>
 
     <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/allpass_back1">
         <ImageView
                 android:clickable="true"

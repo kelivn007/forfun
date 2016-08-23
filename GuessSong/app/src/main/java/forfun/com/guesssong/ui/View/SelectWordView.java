@@ -82,6 +82,7 @@ public class SelectWordView extends GridView {
 
             Button btnWord = (Button) convertView.findViewById(R.id.btn_word);
             btnWord.setText(selectWord.mWord);
+            selectWord.mSelectWordBtn = btnWord;
 
             btnWord.setVisibility(View.VISIBLE);
 
