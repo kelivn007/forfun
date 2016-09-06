@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.Intent;
@@ -19,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,26 +33,40 @@ import forfun.com.guesssong.ui.view.MyAnimationListener;
 import forfun.com.guesssong.ui.view.SelectWordView;
 import forfun.com.guesssong.ui.view.TitleBar;
 import forfun.com.guesssong.util.FLog;
+import forfun.com.guesssong.util.Scalpel;
 import forfun.com.guesssong.util.SoundPlayer;
 import forfun.com.guesssong.util.WordUtil;
 
-public class MainActivity extends Activity implements View.OnClickListener, ISelectWordListener, MainPresenter
+public class MainActivity extends BaseActivity implements ISelectWordListener, MainPresenter
         .IMainPresenter, LoaderManager.LoaderCallbacks<MainPresenter> {
 
+    @Scalpel.InjectView(id = R.id.top_bar_panel)
     private TitleBar mTitleBar;
 
+    @Scalpel.InjectView(id = R.id.btn_record_play, clickable = true)
     private ImageView mBtnRecordPlay;
+
+    @Scalpel.InjectView(id = R.id.img_record_disc)
     private ImageView mImgRecordDisc;
+    @Scalpel.InjectView(animId = R.anim.disc_rotate)
     private Animation mDiscAnim;
 
+    @Scalpel.InjectView(id = R.id.img_record_pin)
     private ImageView mImgRecordPin;
+    @Scalpel.InjectView(animId = R.anim.record_pin_rotate_in)
     private Animation mRecordPinAnimIn;
+    @Scalpel.InjectView(animId = R.anim.record_pin_rotate_out)
     private Animation mRecordPinAnimOut;
 
+    @Scalpel.InjectView(id = R.id.answer_word_panel)
     private ViewGroup mAnswerWordView;
+
+    @Scalpel.InjectView(id = R.id.select_word_view)
     private SelectWordView mSelectWordView;
 
+    @Scalpel.InjectView(id = R.id.delete_answer_btn, clickable = true)
     private ImageButton mDeleteAnswerBtn;
+    @Scalpel.InjectView(id = R.id.tip_answer_btn, clickable = true)
     private ImageButton mTipAnswerBtn;
 
     private AlertDialog mNextLevelDialog;
@@ -65,23 +77,12 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
 
     private MainPresenter mMainPresenter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void init() {
+        mSelectWordView.setSelectListener(this);
 
-        mTitleBar = (TitleBar) findViewById(R.id.top_bar_panel);
-
-        mBtnRecordPlay = (ImageView) findViewById(R.id.btn_record_play);
-        mBtnRecordPlay.setOnClickListener(this);
-        mImgRecordDisc = (ImageView) findViewById(R.id.img_record_disc);
-        mDiscAnim = AnimationUtils.loadAnimation(this, R.anim.disc_rotate);
         mDiscAnim.setInterpolator(new LinearInterpolator());
 
-        mImgRecordPin = (ImageView) findViewById(R.id.img_record_pin);
-        mRecordPinAnimIn = AnimationUtils.loadAnimation(this, R.anim.record_pin_rotate_in);
         mRecordPinAnimIn.setFillAfter(true);
-        mRecordPinAnimOut = AnimationUtils.loadAnimation(this, R.anim.record_pin_rotate_out);
         mRecordPinAnimOut.setFillAfter(true);
 
         mRecordPinAnimIn.setAnimationListener(new MyAnimationListener() {
@@ -102,15 +103,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
 
         });
 
-        mAnswerWordView = (ViewGroup) findViewById(R.id.answer_word_panel);
-        mSelectWordView = (SelectWordView) findViewById(R.id.select_word_view);
-        mSelectWordView.setSelectListener(this);
-
-        mDeleteAnswerBtn = (ImageButton) findViewById(R.id.delete_answer_btn);
-        mDeleteAnswerBtn.setOnClickListener(this);
-        mTipAnswerBtn = (ImageButton) findViewById(R.id.tip_answer_btn);
-        mTipAnswerBtn.setOnClickListener(this);
-
         mNextLevelPannel = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.next_level_layout, null);
         mNextLevelStageTxt = (TextView) mNextLevelPannel.findViewById(R.id.stage_txt);
         mNextLevelSongNameTxt = (TextView) mNextLevelPannel.findViewById(R.id.song_name);
@@ -123,8 +115,13 @@ public class MainActivity extends Activity implements View.OnClickListener, ISel
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void dispatchClick(int id) {
+        switch (id) {
             case R.id.btn_record_play:
                 mMainPresenter.clickPlaySong();
                 break;
