@@ -160,9 +160,6 @@ public class MainActivity extends BaseActivity implements ISelectWordListener, M
 
             if (TextUtils.isEmpty(answerTxt.getText())) {
                 answerTxt.setText(word.mWord);
-                answerTxt.setTag(word);
-                FLog.i(word.mSelectWordBtn + "");
-                word.mSelectWordBtn.setVisibility(View.INVISIBLE);
                 answerstr = answerstr + answerTxt.getText();
                 break;
             } else {
@@ -197,12 +194,11 @@ public class MainActivity extends BaseActivity implements ISelectWordListener, M
 
                     @Override
                     public void onClick(View v) {
-                        SelectWord word = (SelectWord) v.getTag();
-                        if (null != word) {
-                            FLog.i(word.mSelectWordBtn + "");
-                            word.mSelectWordBtn.setVisibility(View.VISIBLE);
-                            v.setTag(null);
-                            ((TextView) v).setText("");
+                        TextView textView = (TextView) v;
+                        String word = textView.getText().toString();
+                        if (!TextUtils.isEmpty(word)) {
+                            mSelectWordView.resetWordBtn(word);
+                            textView.setText("");
                         }
                     }
                 });

@@ -19,6 +19,7 @@ import android.widget.GridView;
 import forfun.com.guesssong.R;
 import forfun.com.guesssong.model.ISelectWordListener;
 import forfun.com.guesssong.model.bean.SelectWord;
+import forfun.com.guesssong.util.FLog;
 
 /**
  * Created by huangwei05 on 16/7/21.
@@ -62,6 +63,16 @@ public class SelectWordView extends GridView {
         mAdapter.notifyDataSetChanged();
     }
 
+    public void resetWordBtn(String word) {
+        FLog.i("reset word " + word);
+        for (SelectWord selectword : mSelectWordArr) {
+            if (word.equalsIgnoreCase(selectword.mWord)) {
+                selectword.mSelectWordBtn.setVisibility(View.VISIBLE);
+                return;
+            }
+        }
+    }
+
     private class WordAdapter extends BaseAdapter implements OnClickListener {
 
         @Override
@@ -71,7 +82,7 @@ public class SelectWordView extends GridView {
 
         @Override
         public Object getItem(int position) {
-            return mSelectWordArr.get(position);
+            return null;
         }
 
         @Override
@@ -85,26 +96,36 @@ public class SelectWordView extends GridView {
 
             if (null == convertView) {
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.input_item, null);
-                Button btnWord = (Button) convertView.findViewById(R.id.btn_word);
-                btnWord.setOnClickListener(this);
+                Button btn = (Button) convertView.findViewById(R.id.btn_word);
+                btn.setOnClickListener(this);
             }
 
-            Button btnWord = (Button) convertView.findViewById(R.id.btn_word);
-            btnWord.setText(selectWord.mWord);
-            selectWord.mSelectWordBtn = btnWord;
-
-            btnWord.setVisibility(View.VISIBLE);
-
-            convertView.setTag(selectWord);
+            Button btn = (Button) convertView.findViewById(R.id.btn_word);
+            btn.setText(selectWord.mWord);
+            btn.setVisibility(View.VISIBLE);
             return convertView;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
         }
 
         @Override
         public void onClick(View v) {
             if (null != mSelectWordLinstener) {
-                SelectWord selectWord = (SelectWord) ((ViewGroup) v.getParent()).getTag();
-                selectWord.mSelectWordBtn = (Button) v;
-                mSelectWordLinstener.onWordSelect(selectWord);
+                FLog.i("onclick " + v);
+
+                Button btnWord = (Button) v;
+                String word = btnWord.getText().toString();
+                for (SelectWord selectword : mSelectWordArr) {
+                    if (word.equalsIgnoreCase(selectword.mWord)) {
+                        selectword.mSelectWordBtn = btnWord;
+                        selectword.mSelectWordBtn.setVisibility(View.INVISIBLE);
+                        mSelectWordLinstener.onWordSelect(selectword);
+                        return;
+                    }
+                }
             }
         }
     }
