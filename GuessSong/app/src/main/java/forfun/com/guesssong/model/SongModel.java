@@ -5,6 +5,7 @@ package forfun.com.guesssong.model;
 
 import java.util.ArrayList;
 
+import android.media.audiofx.Visualizer;
 import forfun.com.guesssong.model.bean.Song;
 import forfun.com.guesssong.util.Constant;
 import forfun.com.guesssong.util.DataUtil;
@@ -25,18 +26,24 @@ public class SongModel {
     private ArrayList<Song> mSongArr = new ArrayList<Song>();
     private int mCurrentStage = 1;
     private Song mCurrentSong;
+    private Visualizer mVisualizer;
 
     public SongModel() {
 
     }
 
-    public void init() {
+    public void init(Visualizer.OnDataCaptureListener linstener) {
         for (int i = 0; i < Constant.SONG_INFO.length; i++) {
             mSongArr.add(new Song(Constant.SONG_INFO[i][0], Constant.SONG_INFO[i][1]));
         }
 
         mCurrentStage = DataUtil.readStage();
         mCurrentSong = getNextSong();
+
+        mVisualizer = new Visualizer(0);
+        mVisualizer.setDataCaptureListener(linstener, Visualizer.getMaxCaptureRate(), true, false);
+        mVisualizer.setCaptureSize(256);
+        mVisualizer.setEnabled(true);
     }
 
     public void playCurrent() {
@@ -50,6 +57,7 @@ public class SongModel {
     public Song getCurrentSong() {
         return mCurrentSong;
     }
+
 
     public ANSWERSTATE checkAnswer(String answer) {
         if (mCurrentSong.getName().length() > answer.length()) {

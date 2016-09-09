@@ -3,7 +3,9 @@
  */
 package forfun.com.guesssong.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import forfun.com.guesssong.util.Scalpel;
@@ -13,6 +15,8 @@ import forfun.com.guesssong.util.Scalpel;
  */
 public abstract class BaseActivity extends Activity implements View.OnClickListener{
 
+    String[] permissions = new String[] {Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.RECORD_AUDIO};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +24,17 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
 
         Scalpel.bindView(this);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, 0);
+        } else {
+            init();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         init();
     }
 

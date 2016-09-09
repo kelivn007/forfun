@@ -3,29 +3,25 @@
   ~ Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="forfun.com.guesssong">
+          package="bussiness.baidu.com.myapplication">
 
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS">
     </uses-permission>
     <uses-permission android:name="android.permission.RECORD_AUDIO" >
     </uses-permission>
-
     <application
-            android:name=".GuessSongApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity" android:screenOrientation="portrait">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.activity.AllPassActivity"/>
     </application>
 
 </manifest>

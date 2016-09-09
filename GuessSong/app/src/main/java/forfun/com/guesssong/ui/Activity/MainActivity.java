@@ -32,6 +32,7 @@ import forfun.com.guesssong.ui.view.DialogHelper;
 import forfun.com.guesssong.ui.view.MyAnimationListener;
 import forfun.com.guesssong.ui.view.SelectWordView;
 import forfun.com.guesssong.ui.view.TitleBar;
+import forfun.com.guesssong.ui.view.WaveFormView;
 import forfun.com.guesssong.util.FLog;
 import forfun.com.guesssong.util.Scalpel;
 import forfun.com.guesssong.util.SoundPlayer;
@@ -74,6 +75,9 @@ public class MainActivity extends BaseActivity implements ISelectWordListener, M
     private TextView mNextLevelStageTxt;
     private TextView mNextLevelSongNameTxt;
     private ImageButton mNextLevelBtn;
+
+    @Scalpel.InjectView(id = R.id.view_wave)
+    private WaveFormView mWaveFormView;
 
     private MainPresenter mMainPresenter;
 
@@ -141,9 +145,15 @@ public class MainActivity extends BaseActivity implements ISelectWordListener, M
     protected void onPause() {
         super.onPause();
 
-        mImgRecordDisc.clearAnimation();
-        mImgRecordPin.clearAnimation();
-        mMainPresenter.pause();
+        if (null != mImgRecordDisc) {
+            mImgRecordDisc.clearAnimation();
+            mImgRecordPin.clearAnimation();
+        }
+
+        if (null != mMainPresenter) {
+            mMainPresenter.pause();
+        }
+
     }
 
     @Override
@@ -332,6 +342,11 @@ public class MainActivity extends BaseActivity implements ISelectWordListener, M
         mTitleBar.updateCoin(num + "");
     }
 
+    @Override
+    public void updateWaveForm(byte[] form) {
+        mWaveFormView.updateWaveForm(form);
+    }
+
     private SelectWord findTipAnswer(Song song, int index) {
         for (int i = 0; i < 18; i++) {
             SelectWord word = (SelectWord) mSelectWordView.getChildAt(i).getTag();
@@ -343,6 +358,8 @@ public class MainActivity extends BaseActivity implements ISelectWordListener, M
 
         return null;
     }
+
+
 
     @Override
     public Loader<MainPresenter> onCreateLoader(int id, Bundle args) {

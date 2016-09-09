@@ -24,14 +24,13 @@
             android:layout_below="@id/top_bar_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp">
+            android:layout_centerHorizontal="true">
 
         <FrameLayout
                 android:id="@+id/guess_type_panel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="2dp"
                 android:layout_centerHorizontal="true">
 
             <ImageView
@@ -165,5 +164,12 @@
             android:layout_margin="2dp"
             android:background="@drawable/game_share"/>
 
+    <forfun.com.guesssong.ui.view.WaveFormView
+            android:id="@+id/view_wave"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/input_panel"
+            android:layout_margin="5dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"/>
 
 </RelativeLayout>
