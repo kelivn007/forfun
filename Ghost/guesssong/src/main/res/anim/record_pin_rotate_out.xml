@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
+  -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <rotate
+        android:duration="600"
+        android:fromDegrees="35"
+        android:toDegrees="0"
+        android:pivotX="40%"
+        android:pivotY="8%"/>
+</set>

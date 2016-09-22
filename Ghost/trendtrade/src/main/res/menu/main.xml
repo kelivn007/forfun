@@ -1,0 +1,22 @@
+<!--
+  ~ Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
+  -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.hw.trendtrade.MainActivity" >
+
+    <item
+        android:id="@+id/action_recalculate"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:title="重新计算"/>
+    
+    <item
+        android:id="@+id/action_clear"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:title="清空数据"/>
+    
+
+</menu>

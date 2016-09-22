@@ -1,4 +1,4 @@
 /*
  * Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
  */
-include ':app', ':testapp'
+include ':app', ':testapp', ':trendtrade', ':guesssong'

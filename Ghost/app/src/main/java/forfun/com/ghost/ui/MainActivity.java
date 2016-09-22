@@ -1,13 +1,9 @@
 /*
  * Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
  */
-package forfun.com.ghost;
-
-import java.io.File;
-import java.lang.reflect.Field;
+package forfun.com.ghost.ui;
 
 import android.Manifest.permission;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -20,13 +16,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import dalvik.system.DexClassLoader;
-import forfun.com.ghost.ams.AMSHookHelper;
-import forfun.com.ghost.classloader.BaseDexClassLoaderHookHelper;
+import forfun.com.ghost.R;
+import forfun.com.ghost.util.ApkConfig;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -92,42 +86,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            Utils.extractAssets(this, "test.apk");
-
-            File apkFile = new File(getFilesDir().getAbsolutePath() + "/test.apk");
-            File odexFile = new File(getFilesDir().getAbsolutePath() + "/test.dex");
-            BaseDexClassLoaderHookHelper.patchClassLoader(getClassLoader(), apkFile, odexFile);
-
-            AMSHookHelper.hookActivityManagerNative();
-            AMSHookHelper.hookActivityThreadHandler();
-
-            try {
-                Field pathListField = DexClassLoader.class.getSuperclass().getDeclaredField("pathList");
-
-                pathListField.setAccessible(true);
-                Object pathListObj = pathListField.get(getClassLoader());
-
-                // 获取 PathList: Element[] dexElements
-                Field dexElementArray = pathListObj.getClass().getDeclaredField("dexElements");
-                dexElementArray.setAccessible(true);
-                Object[] dexElements = (Object[]) dexElementArray.get(pathListObj);
-
-                for (Object object: dexElements) {
-                    Log.i("tttt", object + "");
-                }
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-
-            ComponentName componentName = new ComponentName("forfun.com.testapp", "forfun.com.testapp"
-                    + ".MainActivity");
-            Intent intent = new Intent();
-            intent.setComponent(componentName);
-            startActivity(intent);
+        if (id == R.id.action_install) {
             return true;
         }
 
@@ -141,9 +100,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Intent intent = new Intent();
+            intent.setComponent(ApkConfig.getApkEntryComponent("Test"));
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-
+            Intent intent = new Intent();
+            intent.setComponent(ApkConfig.getApkEntryComponent("TrendTrade"));
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

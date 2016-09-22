@@ -9,6 +9,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -31,9 +32,13 @@ public class ActivityThreadHandlerCallback implements Handler.Callback {
                 Field intentField = object.getClass().getDeclaredField("intent");
                 intentField.setAccessible(true);
                 Intent intent = (Intent) intentField.get(object);
-                ComponentName componentName = intent.getParcelableExtra("real");
-                intent.setComponent(componentName);
-                Log.i(TAG, intent + "");
+                String pkgName = intent.getStringExtra("pkg");
+                String clsName = intent.getStringExtra("cls");
+                if (!TextUtils.isEmpty(pkgName) && !TextUtils.isEmpty(clsName)) {
+                    ComponentName componentName = new ComponentName(pkgName, clsName);
+                    Log.i(TAG, "real componentName = " + componentName.getClassName());
+                    intent.setComponent(componentName);
+                }
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
