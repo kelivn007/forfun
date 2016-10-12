@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Ghost.iml" filepath="$PROJECT_DIR$/Ghost.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghost/app.iml" filepath="$PROJECT_DIR$/ghost/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghost/ghost.iml" filepath="$PROJECT_DIR$/ghost/ghost.iml" />
       <module fileurl="file://$PROJECT_DIR$/guesssong/guesssong.iml" filepath="$PROJECT_DIR$/guesssong/guesssong.iml" />
       <module fileurl="file://$PROJECT_DIR$/testapp/testapp.iml" filepath="$PROJECT_DIR$/testapp/testapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/trendtrade/trendtrade.iml" filepath="$PROJECT_DIR$/trendtrade/trendtrade.iml" />

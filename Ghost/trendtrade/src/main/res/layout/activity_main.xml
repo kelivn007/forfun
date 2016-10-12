@@ -146,6 +146,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/hudiexiaoying" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="切线大全"
+                android:textColor="#ffff0000"
+                android:textSize="26sp" />
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/qiexian" />
     </LinearLayout>
 
 </ScrollView>

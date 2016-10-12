@@ -8,9 +8,6 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import forfun.com.trendtrade.R;
@@ -35,30 +32,30 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		fragmentManager = getFragmentManager();
-
-		trendSpinner = (Spinner) findViewById(R.id.trend_spinner);
-		trendSpinnerAdapter = new ArrayAdapter<String>(this,
-				R.layout.spinner_item, DATA);
-		trendSpinner.setAdapter(trendSpinnerAdapter);
-		trendSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				switchFragment(arg2);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-
-		switchFragment(UP_TYPE);
+//		fragmentManager = getFragmentManager();
+//
+//		trendSpinner = (Spinner) findViewById(R.id.trend_spinner);
+//		trendSpinnerAdapter = new ArrayAdapter<String>(this,
+//				R.layout.spinner_item, DATA);
+//		trendSpinner.setAdapter(trendSpinnerAdapter);
+//		trendSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//			@Override
+//			public void onItemSelected(AdapterView<?> arg0, View arg1,
+//					int arg2, long arg3) {
+//				// TODO Auto-generated method stub
+//				switchFragment(arg2);
+//			}
+//
+//			@Override
+//			public void onNothingSelected(AdapterView<?> arg0) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//		});
+//
+//		switchFragment(UP_TYPE);
 
 	}
 
